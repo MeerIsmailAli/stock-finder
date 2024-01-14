@@ -11,13 +11,16 @@ const TextBoxExample = () => {
 
   return (
     <div>
-      <input
+      <input className='border-solid border-2 border-indigo-600 mx-3 rounded'
         type="text"
         id="textbox"
         value={textInputValue}
         onChange={handleInputChange}
-        placeholder="enter stock symbol"
+        placeholder="Enter symbol"
       />
+      <button className='border-solid border-2 border-indigo-600 rounded'>
+        enter
+      </button>
     </div>
   );
 };
