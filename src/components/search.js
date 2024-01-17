@@ -10,7 +10,7 @@ const TextBoxExample = () => {
   };
 
   return (
-    <div>
+    <div className='text-balance'>
       <input className='border-solid border-2 border-indigo-600 mx-3 rounded'
         type="text"
         id="textbox"
