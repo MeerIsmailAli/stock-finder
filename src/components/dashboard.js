@@ -1,7 +1,7 @@
 import React from 'react';
 import TextBoxExample from './search';
 import Fetch from '../apis/meta_data'
-import Example from './charts';
+import FetchChart from './charts';
 
 
 export const Dashboard = () =>{
@@ -20,7 +20,8 @@ export const Dashboard = () =>{
         <Fetch/>
       </div>
       <div className="mu-3 mx-5 col-span-2 row-span-3 bg-gray-200 border-solid border-2 border-gray-400 sm:col-span-7 sm:row-span-5">
-        <Example/>
+        <FetchChart/>
+        {/* <Example/> */}
       </div>
     </div>
     );
