@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 
-const TextBoxExample = () => {
+const Search = ({onSymbolChange}) => {
   // State to manage the value of the text input
-  const [textInputValue, setTextInputValue] = useState('');
+  const [symbol, setSymbol] = useState('');
 
   // Event handler for input changes
-  const handleInputChange = (event) => {
-    setTextInputValue(event.target.value);
+  const handleSymbolChange = (event) => {
+    setSymbol(event.target.value);
+  };
+
+  const handleButtonClick = () => {
+    onSymbolChange(symbol);
   };
 
   return (
@@ -14,15 +18,15 @@ const TextBoxExample = () => {
       <input className='border-solid border-2 border-indigo-600 mx-3 rounded'
         type="text"
         id="textbox"
-        value={textInputValue}
-        onChange={handleInputChange}
+        value={symbol}
+        onChange={handleSymbolChange}
         placeholder="Enter symbol"
       />
-      <button className='border-solid border-2 border-indigo-600 rounded'>
+      <button  onClick={handleButtonClick} className='border-solid border-2 border-indigo-600 rounded'>
         enter
       </button>
     </div>
   );
 };
 
-export default TextBoxExample;
+export default Search;

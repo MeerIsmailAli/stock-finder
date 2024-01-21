@@ -1,19 +1,26 @@
   import { useState, useEffect } from 'react';
 
 
-  const Fetch = () => {
+  const Fetch = ({symbol}) => {
 
     const [metaData, setMetaData] = useState({});
+
     useEffect(() => {
-      fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=RELIANCE.BSE&outputsize=full&apikey=demo')
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-          setMetaData(data['Meta Data']);
-        });
-    }, []);
+      // Use process.env.REACT_APP_API_KEY to access environment variable
+      const apiKey = process.env.REACT_APP_API_KEY;
+  
+      if (symbol && apiKey) {
+        fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=${apiKey}`)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setMetaData(data['Meta Data']);
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      }
+    }, [symbol]);
 
     return (
         <div className='text-balance'>
@@ -21,8 +28,8 @@
           {Object.keys(metaData).length > 0 && (
             <ul>
               {Object.entries(metaData).map(([key, value]) => (
-                <li key={key}>
-                  <strong>{key}:</strong> {value}
+                <li>
+                  <strong>{value}</strong> 
                 </li>
               ))}
             </ul>

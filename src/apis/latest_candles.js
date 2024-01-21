@@ -1,19 +1,25 @@
 import { useState, useEffect } from 'react';
 
 
-const Latest = () => {
+const Latest = ({symbol}) => {
 
   const [latestData, setlatestData] = useState({});
   useEffect(() => {
-    fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&outputsize=compact&apikey=demo')
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setMetaData(data['Meta Data']);
-      });
-  }, []);
+    // Use process.env.REACT_APP_API_KEY to access environment variable
+    const apiKey = process.env.REACT_APP_API_KEY;
+
+    if (symbol && apiKey) {
+      fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=${apiKey}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setMetaData(data['Meta Data']);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }, [symbol]);
 
   return (
       <div className='text-balance'>
@@ -31,4 +37,4 @@ const Latest = () => {
     );
 };
 
-export default Fetch;
+export default Latest;

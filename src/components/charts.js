@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const FetchChart = () => {
+const FetchChart = ({ symbol }) => {
   const [chartData, setChartData] = useState({});
 
   useEffect(() => {
-    fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=RELIANCE.BSE&outputsize=full&apikey=demo')
-      .then((res) => res.json())
-      .then((data) => {
-        setChartData(data);
-        console.log(data);
-      });
-  }, []);
+    // Use process.env.REACT_APP_API_KEY to access environment variable
+    const apiKey = process.env.REACT_APP_API_KEY;
+
+    if (symbol && apiKey) {
+      fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}&outputsize=compact&apikey=${apiKey}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setChartData(data['Meta Data']);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }, [symbol]);
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -43,8 +51,6 @@ const FetchChart = () => {
       )}
     </ResponsiveContainer>
   );
-  
 };
 
 export default FetchChart;
-
