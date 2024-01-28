@@ -1,41 +1,48 @@
-  import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
+const MetaData = ({ symbol }) => {
+  const [metaData, setMetaData] = useState({});
 
-  const Fetch = ({symbol}) => {
+  useEffect(() => {
+    // Use process.env.REACT_APP_API_KEY to access environment variable
+    const apiKey = process.env.REACT_APP_API_KEY;
 
-    const [metaData, setMetaData] = useState({});
+    if (symbol && apiKey) {
+      fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=${apiKey}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
 
-    useEffect(() => {
-      // Use process.env.REACT_APP_API_KEY to access environment variable
-      const apiKey = process.env.REACT_APP_API_KEY;
-  
-      if (symbol && apiKey) {
-        fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&outputsize=compact&apikey=${apiKey}`)
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
+          // Check if "Meta Data" exists in the response
+          if (data['Meta Data']) {
             setMetaData(data['Meta Data']);
-          })
-          .catch((error) => {
-            console.error('Error fetching data:', error);
-          });
-      }
-    }, [symbol]);
+          } else {
+            setMetaData(null); // Set metaData to null if "Meta Data" is not present
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }, [symbol]);
 
-    return (
-        <div className='text-balance'>
-          <h2>Meta Data</h2>
-          {Object.keys(metaData).length > 0 && (
-            <ul>
-              {Object.entries(metaData).map(([key, value]) => (
-                <li>
-                  <strong>{value}</strong> 
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      );
-  };
+  return (
+    <div className='text-balance'>
+      <></>
+      {metaData ? (
+        <ul>
+          {Object.entries(metaData).map(([key, value]) => (
+            <li key={key}>
+              <strong>{value}</strong>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No Meta Data available</p>
+      )}
+    </div>
+  );
+};
 
-  export default Fetch;
+export default MetaData;
+
