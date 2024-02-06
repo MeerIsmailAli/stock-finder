@@ -9,25 +9,25 @@ const IntraDay = ({ symbol }) => {
     fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${apiKey}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setDayData(data['Time Series (5min)'] ? Object.values(data['Time Series (5min)'])[0] : {});
       });
   }, [symbol]);
 
 
   return (
-    <div className='text-balance w-full h-full overflow-y-auto min-w-0'>
+    <div className='text-balance w-full h-full overflow-y-auto min-w-0 my-8 mx-8'>
       {Object.keys(dayData).length > 0 && (
-        <ul className='w-full h-full grid grid-cols-1 gap-4'>
+        <dl className='max-w-md text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700'>
           {Object.entries(dayData).map(([key, value]) => (
-            <li key={key} className='grid grid-cols-2 items-center py-2'>
-              <strong>{key}:</strong> {value}
-              <div className='col-span-2 h-0.5 bg-gray-400'></div>
-            </li>
+            <div key={key} className='flex flex-col py-3'>
+              <dt className='mb-1 text-gray-500 md:text-lg dark:text-gray-400'>{key}  :  {value}</dt>
+            </div>
           ))}
-        </ul>
+        </dl>
       )}
     </div>
-  );   
+  );  
 };
 
 export default IntraDay;

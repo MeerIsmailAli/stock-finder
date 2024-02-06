@@ -14,18 +14,23 @@ const Search = ({onSymbolChange}) => {
   };
 
   return (
-    <div className='text-balance'>
-      <input className='border-solid border-2 border-indigo-600 mx-3 rounded'
-        type="text"
-        id="textbox"
-        value={symbol}
-        onChange={handleSymbolChange}
-        placeholder="Enter symbol"
-      />
-      <button  onClick={handleButtonClick} className='border-solid border-2 border-indigo-600 rounded'>
-        enter
-      </button>
-    </div>
+    <div className='text-balance flex flex-col md:flex-row'>
+  <input
+    className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+    type="text"
+    id="textbox"
+    value={symbol}
+    onChange={handleSymbolChange}
+    placeholder="Enter symbol"
+  />
+  <button
+    onClick={handleButtonClick}
+    className='inline-flex items-center justify-center px-5 py-3 mt-2 md:mt-0 md:ml-2 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
+  >
+    Enter
+  </button>
+</div>
+
   );
 };
 

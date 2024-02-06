@@ -1,44 +1,31 @@
 import React, {useState} from 'react';
 import Search from './search';
-import MetaData from '../apis/meta_data'
 import Chart from './chart';
 import IntraDay from '../apis/intraday';
-import  Info  from './info';
+
 
 
 export const Dashboard = () =>{
-
-  const gradientStyle = {
-    background: 'linear-gradient(90deg, #54127a, #2c3e50)',
-    backgroundSize: '200% 200%',
-    animation: 'gradientAnimation 3s ease infinite', // Updated animation duration to 6s for the complete loop
-  };
-  
-
   const [symbol, setSymbol] = useState('');
 
   const handleSymbolChange = (newSymbol) => {
     setSymbol(newSymbol);
   };
     return (
-    <div style={gradientStyle} className="grid grid-cols-2 grid-rows-9 gap-4 h-screen w-screen sm:grid-cols-10 sm:grid-rows-10">
-      <div className="grid grid-cols-subgrid my-2 mx-5 col-span-2 row-span-2 bg-purple-200 border-solid border-2 border-gray-400 sm:col-span-10 sm:row-span-2 hover:shadow-2xl">
-        <div className='my-5 col-span-2 row-span-1 sm:col-start-1 sm:row-span-2'>
-          <Search onSymbolChange={handleSymbolChange}/>
-        </div>
-        <div className='my-5 col-span-2 row-span-1 border-solid border-2 sm:col-start-6 sm:row-span-2'>
-          <Info/>
-        </div>
-      </div>
-      <div className="mu-3 mx-5 col-span-2 row-span-2 bg-purple-200 border-solid border-2 border-gray-400 sm:col-span-7 sm:row-span-2 hover:shadow-2xl">
-      <MetaData symbol={symbol}/>
-      </div>
-      <div className="mu-3 mx-5 col-span-2 row-span-2 bg-purple-200 border-solid border-2 border-gray-400 sm:col-span-3 sm:row-span-7 hover:shadow-2xl">
-        <IntraDay symbol={symbol}/>
-      </div>
-      <div className="my-3 mx-5 col-span-2 row-span-3 bg-purple-200 border-solid border-2 border-gray-400 sm:col-span-7 sm:row-span-5 hover:shadow-2xl">
-        <Chart symbol={symbol}/>
+  <section className="bg-white dark:bg-gray-900 grid grid-cols-1 grid-rows-7 sm:grid-cols-4 sm:grid-rows-8 mx-8">
+    <div className="mx-4 my-8 place-self-center col-span-1 row-span-2 sm:col-span-2 sm:row-span-2">
+      <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Stock Analyzer Tool</h1>
+      <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Returns past 4 months recorded Aggregate Bars of a given stock featuring the corresponding open and close values for that particular day.</p>
+      <div>
+        <Search onSymbolChange={handleSymbolChange} />
       </div>
     </div>
+    <div className="mx-4 my-8 border-solid border-2 border-gray-200 rounded col-span-1 row-span-2 sm:col-span-2 sm:row-span-2">
+      <IntraDay symbol={symbol}/>
+    </div>
+    <div className="mx-4 my-4 col-span-1 row-span-3 sm:col-span-4 sm:row-span-4">
+    <Chart symbol={symbol}/>
+    </div>
+  </section>
     );
 };
