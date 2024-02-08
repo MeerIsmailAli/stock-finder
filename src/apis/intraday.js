@@ -9,7 +9,6 @@ const IntraDay = ({ symbol }) => {
     fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${apiKey}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setDayData(data['Time Series (5min)'] ? Object.values(data['Time Series (5min)'])[0] : {});
       });
   }, [symbol]);
