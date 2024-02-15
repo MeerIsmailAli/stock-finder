@@ -23,7 +23,7 @@ export const Dashboard = () =>{
     <div className="mx-4 my-8 border-solid border-2 border-gray-200 rounded col-span-1 row-span-2 sm:col-span-2 sm:row-span-2">
       <IntraDay symbol={symbol}/>
     </div>
-    <div className="mx-4 my-4 col-span-1 row-span-3 sm:col-span-4 sm:row-span-4">
+    <div className="mx-4 my-4 col-span-1 row-span-3 sm:col-span-4 sm:row-span-4 border-solid border-2 border-gray-200">
     <Chart symbol={symbol}/>
     </div>
   </section>
