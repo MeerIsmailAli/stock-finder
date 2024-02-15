@@ -18,3 +18,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STOCK_ANALYZER_4F86A }}'
           channelId: live
           projectId: stock-analyzer-4f86a
+          apiKey: process.env.REACT_APP_API_KEY
