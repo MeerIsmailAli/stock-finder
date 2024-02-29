@@ -15,3 +15,13 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STOCK_ANALYZER_4F86A }}'
           projectId: stock-analyzer-4f86a
+          
+  create_env_file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create env file
+        run: |
+          touch .env
+          echo API_ENDPOINT=${{ secrets.API_ENDPOINT }} >> .env
+          echo API_KEY=${{ secrets.API_KEY }} >> .env
+          cat .env          
