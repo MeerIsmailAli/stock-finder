@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/stock-finder/static/css/main.5bac62eb.css",
+    "main.js": "/stock-finder/static/js/main.4f2bf066.js",
+    "index.html": "/stock-finder/index.html",
+    "main.5bac62eb.css.map": "/stock-finder/static/css/main.5bac62eb.css.map",
+    "main.4f2bf066.js.map": "/stock-finder/static/js/main.4f2bf066.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5bac62eb.css",
+    "static/js/main.4f2bf066.js"
+  ]
+}
